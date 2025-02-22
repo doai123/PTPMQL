@@ -20,6 +20,22 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
+[C:/mvc/PTPMQL/mvc/Views/BMI/Calculate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQk1JXENhbGN1bGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/mvc/PTPMQL/mvc/Views/BMI/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQk1JXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/mvc/PTPMQL/mvc/Views/Diem/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGllbVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/mvc/PTPMQL/mvc/Views/HoaDon/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9hRG9uXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/mvc/PTPMQL/mvc/Views/Home/Contact.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb250YWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

@@ -1,0 +1,39 @@
+@model mvc.Models.Diem
+
+@{
+    ViewData["Title"] = "Tính Điểm";
+}
+
+<h1>Tính Tổng Điểm</h1>
+
+<form method="post" asp-action="TinhDiem">
+    <div>
+        <label for="DiemA">Điểm A:</label>
+        <input asp-for="DiemA" class="form-control" />
+        <span asp-validation-for="DiemA" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label for="DiemB">Điểm B:</label>
+        <input asp-for="DiemB" class="form-control" />
+        <span asp-validation-for="DiemB" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label for="DiemC">Điểm C:</label>
+        <input asp-for="DiemC" class="form-control" />
+        <span asp-validation-for="DiemC" class="text-danger"></span>
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-primary">Tính Điểm</button>
+</form>
+
+@if (ViewBag.SumDiem != null)
+{
+    <h2>Kết Quả: @ViewBag.SumDiem</h2>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

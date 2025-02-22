@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Tính Tiền Hóa Đơn";
+}
+
+<h1>Tính Tiền Hóa Đơn</h1>
+
+<form method="post" asp-action="TinhTien">
+    <div>
+        <label for="soLuong">Số Lượng:</label>
+        <input type="number" name="soLuong" min="1" required><br><br>
+
+        <label for="donGia">Đơn Giá (VND):</label>
+        <input type="number" name="donGia" min="1000" required><br><br>
+
+        <button type="submit">Tính Tiền</button>
+    </div>
+</form>
+
+@if (ViewBag.ThanhTien != null)
+{
+    <h2>Thành Tiền: @ViewBag.ThanhTien.ToString("N0") VND</h2>
+}
+
+@if (ViewBag.Error != null)
+{
+    <h3 style="color: red;">@ViewBag.Error</h3>
+}

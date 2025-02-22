@@ -1,0 +1,11 @@
+@model mvc.Models.BMI
+
+<h2>Kết quả BMI</h2>
+
+@if (Model != null)
+{
+    <p>Chỉ số BMI: <strong>@Model.CalculateBMI</strong></p>
+    <p>Phân loại: <strong>@Model.Category</strong></p>
+}
+
+<a asp-action="Create">Quay lại</a>
