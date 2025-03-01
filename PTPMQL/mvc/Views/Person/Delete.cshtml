@@ -1,0 +1,10 @@
+@model mvc.Models.Person
+
+<h2>Xóa Person</h2>
+<p>Bạn có chắc chắn muốn xóa <strong>@Model.FullName</strong> không?</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="PersonId" />
+    <button type="submit" class="btn btn-danger">🗑️ Xóa</button>
+    <a asp-action="Data" class="btn btn-secondary">🔙 Hủy</a>
+</form>

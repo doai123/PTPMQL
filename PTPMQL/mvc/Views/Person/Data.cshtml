@@ -1,0 +1,29 @@
+@model IEnumerable<mvc.Models.Person>
+
+<h2>Danh sách Person</h2>
+<a asp-action="Create" class="btn btn-primary">➕ Thêm Person</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>PersonId</th>
+            <th>FullName</th>
+            <th>Address</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.PersonId</td>
+                <td>@item.FullName</td>
+                <td>@item.Address</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PersonId" class="btn btn-warning">✏️ Sửa</a>
+                    <a asp-action="Delete" asp-route-id="@item.PersonId" class="btn btn-danger">🗑️ Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
