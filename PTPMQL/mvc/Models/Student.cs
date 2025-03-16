@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace mvc.Models
 {
-    public class Student
+    public class Student : Person
     {
-        public string Id { get; set; }
-        public string FullName { get; set; }
+        public string StudentCode { get; set; }
     }
 }

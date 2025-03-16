@@ -30,9 +30,31 @@ namespace mvc.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("PersonType")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("TEXT");
+
                     b.HasKey("PersonId");
 
                     b.ToTable("Persons");
+
+                    b.HasDiscriminator<string>("PersonType").HasValue("Person");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("mvc.Models.Student", b =>
+                {
+                    b.HasBaseType("mvc.Models.Person");
+
+                    b.Property<string>("StudentCode")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.ToTable("Persons");
+
+                    b.HasDiscriminator().HasValue("Student");
                 });
 #pragma warning restore 612, 618
         }
