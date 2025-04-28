@@ -1,6 +1,10 @@
 @model IEnumerable<mvc.Models.Person>
 
 <h2>Danh sách Person</h2>
+<form asp-controller="Person" asp-action="ImportFromExcel" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".xlsx, .xls" required />
+    <button type="submit">Nhập Excel</button>
+</form>
 <a asp-action="Create" class="btn btn-primary">➕ Thêm Person</a>
 
 <table class="table">
