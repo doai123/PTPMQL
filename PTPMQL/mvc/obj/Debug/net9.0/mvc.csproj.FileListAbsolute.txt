@@ -491,7 +491,6 @@ C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
 C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
 C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\EPPlus.dll
 C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\EPPlus.Interfaces.dll
-C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\EPPlus.System.Drawing.dll
 C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\Microsoft.Extensions.Configuration.dll
 C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\Microsoft.Extensions.Configuration.FileExtensions.dll
 C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Json.dll
@@ -499,11 +498,7 @@ C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Abstractio
 C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Physical.dll
 C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\Microsoft.Extensions.FileSystemGlobbing.dll
 C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\Microsoft.IO.RecyclableMemoryStream.dll
-C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
-C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\System.Drawing.Common.dll
-C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\System.Private.Windows.Core.dll
 C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\System.Security.Cryptography.Pkcs.dll
-C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\runtimes\win\lib\net9.0\Microsoft.Win32.SystemEvents.dll
 C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\runtimes\win\lib\net9.0\System.Security.Cryptography.Pkcs.dll
 C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
@@ -575,3 +570,7 @@ C:\mvc\PTPMQL\mvc\obj\Debug\net9.0\compressed\a3ygkwa5zy-2z0ns9nrw6.gz
 C:\mvc\PTPMQL\mvc\obj\Debug\net9.0\compressed\nezrqnk58p-muycvpuwrr.gz
 C:\mvc\PTPMQL\mvc\obj\Debug\net9.0\compressed\v0zgfp0y55-87fc7y1x7t.gz
 C:\mvc\PTPMQL\mvc\obj\Debug\net9.0\compressed\yfc7ypekbg-mlv21k5csn.gz
+C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
+C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\MailKit.dll
+C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\MimeKit.dll
+C:\mvc\PTPMQL\mvc\bin\Debug\net9.0\System.Security.Cryptography.Xml.dll

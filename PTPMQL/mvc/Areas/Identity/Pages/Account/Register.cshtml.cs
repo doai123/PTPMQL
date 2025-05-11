@@ -63,7 +63,6 @@ namespace mvc.Areas.Identity.Pages.Account
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
-            
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         /// <summary>
@@ -71,13 +70,16 @@ namespace mvc.Areas.Identity.Pages.Account
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public class InputModel
+
         {
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Display(Name = "Full name")]
+            [Required]
+            [Display(Name = "Full Name")]
             public string FullName { get; set; }
+            
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
