@@ -1,0 +1,33 @@
+@model mvc.Models.ViewModels.RoleClaimVM
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<h3>Assign Claims to @Model.RoleName</h3>
+<form asp-action="AssignClaim" method="post">
+    <input type="hidden" asp-for="RoleId" />
+    <input type="hidden" asp-for="RoleName" />
+    <div style="max-width: 500px; margin-bottom: 1rem;">
+        <table class="table table-sm table-bordered align-middle mb-0">
+            <thead>
+                <tr>
+                    <th style="width: 70%;">Permission</th>
+                    <th style="width: 30%;">Assigned</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Claims.Count; i++)
+                {
+                    <tr>
+                        <td style="font-size: 0.95rem;">@Model.Claims[i].Value</td>
+                        <td class="text-center">
+                            <input type="checkbox" asp-for="Claims[@i].Selected" />
+                            <input type="hidden" asp-for="Claims[@i].Type" />
+                            <input type="hidden" asp-for="Claims[@i].Value" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form> 

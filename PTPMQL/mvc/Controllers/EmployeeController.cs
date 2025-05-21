@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Authorization;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using mvc.Data;
 using mvc.Models;
-
+using Microsoft.AspNetCore.Authorization;
 namespace mvc.Controllers
 {
     [Authorize]
@@ -21,13 +15,13 @@ namespace mvc.Controllers
             _context = context;
         }
 
-        // GET: Employee
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Employees.ToListAsync());
+            return View(await _context.Employee.ToListAsync());
         }
 
         // GET: Employee/Details/5
+        [Authorize(Roles = "Employee")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,8 +29,8 @@ namespace mvc.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees
-                .FirstOrDefaultAsync(m => m.PersonId == id);
+            var employee = await _context.Employee
+                .FirstOrDefaultAsync(m => m.EmployeeId == id);
             if (employee == null)
             {
                 return NotFound();
@@ -46,28 +40,29 @@ namespace mvc.Controllers
         }
 
         // GET: Employee/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: Employee/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmpId,Department,Email,PersonId,FullName,Address")] Employee employee)
+        [HttpPost] 
+        public async Task<IActionResult> Create([Bind("EmployeeId,FirstName,LastName,Address,DateOfBirth,Position,Email,HireDate")] Employee employee)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+            }       
             return View(employee);
         }
 
         // GET: Employee/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,7 +70,7 @@ namespace mvc.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await _context.Employee.FindAsync(id);
             if (employee == null)
             {
                 return NotFound();
@@ -84,13 +79,12 @@ namespace mvc.Controllers
         }
 
         // POST: Employee/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EmpId,Department,Email,PersonId,FullName,Address")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,FirstName,LastName,Address,DateOfBirth,Position,Email,HireDate")] Employee employee)
         {
-            if (id != employee.PersonId)
+            if (id != employee.EmployeeId)
             {
                 return NotFound();
             }
@@ -104,7 +98,7 @@ namespace mvc.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmployeeExists(employee.PersonId))
+                    if (!EmployeeExists(employee.EmployeeId))
                     {
                         return NotFound();
                     }
@@ -119,6 +113,7 @@ namespace mvc.Controllers
         }
 
         // GET: Employee/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,8 +121,8 @@ namespace mvc.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees
-                .FirstOrDefaultAsync(m => m.PersonId == id);
+            var employee = await _context.Employee
+                .FirstOrDefaultAsync(m => m.EmployeeId == id);
             if (employee == null)
             {
                 return NotFound();
@@ -137,14 +132,15 @@ namespace mvc.Controllers
         }
 
         // POST: Employee/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await _context.Employee.FindAsync(id);
             if (employee != null)
             {
-                _context.Employees.Remove(employee);
+                _context.Employee.Remove(employee);
             }
 
             await _context.SaveChangesAsync();
@@ -153,7 +149,7 @@ namespace mvc.Controllers
 
         private bool EmployeeExists(int id)
         {
-            return _context.Employees.Any(e => e.PersonId == id);
+            return _context.Employee.Any(e => e.EmployeeId == id);
         }
     }
 }

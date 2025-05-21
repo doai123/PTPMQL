@@ -1,0 +1,40 @@
+1. Policy/Role/Claim kiểm tra như thế nào?
+Khi bạn dùng [Authorize(Policy = "TênPolicy")] hoặc [Authorize(Roles = "Admin")] trên controller/action, ASP.NET Core sẽ tự động kiểm tra quyền của user hiện tại dựa trên thông tin đăng nhập (ClaimsPrincipal).
+KHÔNG có sự liên kết trực tiếp giữa [Authorize] và dữ liệu trong bảng (database) ở chỗ attribute này.
+Thông tin về role, claim, ... của user được lấy từ token đăng nhập (cookie, JWT, ...), mà token này được sinh ra khi user đăng nhập thành công.
+
+2. Dữ liệu quyền lấy từ đâu?
+Khi user đăng nhập, ASP.NET Identity sẽ lấy thông tin role và claim của user từ các bảng trong database như:
+- AspNetUsers
+- AspNetRoles
+- AspNetUserRoles
+- AspNetUserClaims
+Sau đó, các thông tin này được lưu vào ClaimsPrincipal (User) của HttpContext.
+
+3. Quy trình kiểm tra quyền:
+- User đăng nhập:
+  ASP.NET Identity lấy roles/claims của user từ database.
+  Gán các thông tin này vào ClaimsPrincipal (User).
+- User truy cập controller/action có [Authorize]:
+  ASP.NET Core kiểm tra User hiện tại có thỏa mãn policy/role/claim không (dựa trên ClaimsPrincipal).
+  Nếu đúng → cho phép truy cập.
+  Nếu sai → trả về 403 hoặc chuyển hướng đến trang đăng nhập.
+
+4. Ví dụ thực tế:
+Bảng dữ liệu:
+- AspNetUsers: Lưu thông tin user
+- AspNetRoles: Lưu các role
+- AspNetUserRoles: Liên kết user với role
+- AspNetUserClaims: Lưu các claim của user
+Khi bạn gán role/claim cho user (qua code hoặc giao diện):
+Dữ liệu được lưu vào các bảng trên.
+Khi user đăng nhập:
+ASP.NET Identity lấy các role/claim này, đưa vào ClaimsPrincipal.
+Khi truy cập action:
+[Authorize(Policy = "PolicyAdmin")] sẽ kiểm tra User hiện tại có role "Admin" hoặc claim tương ứng không.
+
+5. Tóm lại:
+Liên kết giữa [Authorize] và dữ liệu bảng là gián tiếp:
+- Khi đăng nhập, dữ liệu quyền được lấy từ database và lưu vào ClaimsPrincipal.
+- Khi truy cập, ASP.NET Core chỉ kiểm tra ClaimsPrincipal, không truy vấn lại database mỗi lần vào action.
+- Nếu bạn thay đổi quyền của user (thêm/xóa role/claim), user cần đăng nhập lại (hoặc refresh token) để cập nhật quyền mới. 

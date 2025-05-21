@@ -3,6 +3,7 @@ using mvc.Data;
 using mvc.Models;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
+
 namespace mvc.Controllers
 {
     public class PersonController : Controller
@@ -41,51 +42,50 @@ namespace mvc.Controllers
             return View(person);
         }
         
-    [HttpPost]
-    public async Task<IActionResult> ImportFromExcel(IFormFile file)
-    {
-        if (file == null || file.Length == 0)
+        [HttpPost]
+        public async Task<IActionResult> ImportFromExcel(IFormFile file)
         {
-            TempData["Error"] = "Vui lòng chọn file Excel!";
-            return RedirectToAction("Data");
-        }
-
-        try
-        {
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            using (var stream = new MemoryStream())
+            if (file == null || file.Length == 0)
             {
-                await file.CopyToAsync(stream);
-                using (var package = new ExcelPackage(stream))
-                {
-                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
-                    int rowCount = worksheet.Dimension.Rows;
-
-                    for (int row = 2; row <= rowCount; row++)
-                    {
-                        var person = new Person
-                        {
-                            FullName = worksheet.Cells[row, 1].Value?.ToString()?.Trim() ?? "",
-                            Address = worksheet.Cells[row, 2].Value?.ToString()?.Trim() ?? ""
-                        };
-
-                        _context.Persons.Add(person);
-                    }
-
-                    await _context.SaveChangesAsync();
-                }
+                TempData["Error"] = "Vui lòng chọn file Excel!";
+                return RedirectToAction("Data");
             }
 
-            TempData["Success"] = "Nhập dữ liệu từ Excel thành công!";
-        }
-        catch (Exception ex)
-        {
-            TempData["Error"] = "Lỗi khi nhập Excel: " + ex.Message;
-        }
+            try
+            {
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                using (var stream = new MemoryStream())
+                {
+                    await file.CopyToAsync(stream);
+                    using (var package = new ExcelPackage(stream))
+                    {
+                        ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+                        int rowCount = worksheet.Dimension.Rows;
 
-        return RedirectToAction("Data");
-    }
+                        for (int row = 2; row <= rowCount; row++)
+                        {
+                            var person = new Person
+                            {
+                                FullName = worksheet.Cells[row, 1].Value?.ToString()?.Trim() ?? "",
+                                Address = worksheet.Cells[row, 2].Value?.ToString()?.Trim() ?? ""
+                            };
 
+                            _context.Persons.Add(person);
+                        }
+
+                        await _context.SaveChangesAsync();
+                    }
+                }
+
+                TempData["Success"] = "Nhập dữ liệu từ Excel thành công!";
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Lỗi khi nhập Excel: " + ex.Message;
+            }
+
+            return RedirectToAction("Data");
+        }
 
         // 🛠 CHỈNH SỬA Person - GET
         public async Task<IActionResult> Edit(int? id)

@@ -1,0 +1,33 @@
+@using Microsoft.AspNetCore.Identity
+@using mvc.Models.ViewModels
+@model IEnumerable<UserWithRoleVM>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Roles</th>
+            <th>Phone Number</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var userWithRoles in Model)
+        {
+            <tr>
+                <td>@userWithRoles.User.UserName</td>
+                <td>
+                    @foreach (var role in userWithRoles.Roles)
+                    {
+                        <span>@role,</span><br />
+                    }
+                </td>
+                <td>@userWithRoles.User.PhoneNumber</td>
+                <td>
+                    <a asp-controller="Account" asp-action="AssignRole" asp-route-userId="@userWithRoles.User.Id" class="btn btn-primary btn-sm">Assign Roles</a>
+                    <a asp-controller="Account" asp-action="AddClaim" asp-route-userId="@userWithRoles.User.Id" class="btn btn-info btn-sm">Add Claims</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
